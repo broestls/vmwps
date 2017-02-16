@@ -28,4 +28,8 @@ Process {
   ElseIf(-Not $Enable -Or $Disable) {
     Get-VMHostService -VMHost (Get-VMHost $Name) | ?{$_.Key -eq "TSM-SSH"} | Stop-VMHostService -Confirm:$false
   }
+  # Did you run this with both -Enable and -Disable? Default to flipping SSH off.
+  Else {
+    Get-VMHostService -VMHost (Get-VMHost $Name) | ?{$_.Key -eq "TSM-SSH"} | Stop-VMHostService -Confirm:$false
+  }
 }
